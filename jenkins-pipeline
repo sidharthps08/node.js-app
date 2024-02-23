@@ -1,0 +1,61 @@
+pipeline {
+    agent {
+        kubernetes {
+            yaml '''
+            apiVersion: v1
+            kind: Pod
+            spec:
+              containers:
+              - name: jnlp
+                workingDir: /var/jenkins_home
+              - name: kaniko
+                workingDir: /var/jenkins_home
+                image: gcr.io/kaniko-project/executor:debug
+                command:
+                - /busybox/cat
+                tty: true
+              - name: argocd
+                image: athulmv06/awsargo:latest
+                command:
+                - sleep
+                args:
+                - 9999999
+            '''
+        }
+    }
+    stages {
+        stage("Build Docker image") {
+            environment {
+                PATH = "/busybox:/kaniko:$PATH"
+            }
+            steps {
+                container(name: 'kaniko', shell: '/busybox/sh') {
+                    script {
+                        checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'pipeline', url: 'https://github.com/sidharthps08/node.js-app']])
+                        sh '''#!/busybox/sh
+                            /kaniko/executor --context `pwd` --dockerfile dockerfile --insecure --skip-tls-verify --cache=true --verbosity debug --destination=192.168.29.181:32000/nodeapp-image:$BUILD_NUMBER
+                        '''
+                    }
+                }
+            }
+        }
+        stage("ArgoCD image") {
+            steps { 
+                container('argocd') {
+                withCredentials([usernamePassword(credentialsId: 'ArogoCD', passwordVariable: 'Arogo_Pass', usernameVariable: 'Arogo_User')]) {
+                    script {
+                        sh "argocd login 10.152.183.61:443 --username ${Arogo_User} --password ${Arogo_Pass} --insecure"
+                        sh "argocd app set myapp -p containers.image=localhost:32000/nodeapp-image:$BUILD_NUMBER"
+                        sh "argocd --grpc-web app sync myapp --force"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
