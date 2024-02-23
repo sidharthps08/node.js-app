@@ -11,12 +11,12 @@ module.exports = {
 const express = require('express');
 const router = express.Router();
 
-// Setting up CSS styles
+// Setting up CSS styles with different non-gray colors
 const styles = `
     <style>
         body {
-            background-color: #f0f0f0; /* Light gray */
-            color: #333; /* Dark gray */
+            background-color: #ffeaa7; /* Light yellow */
+            color: #2d3436; /* Dark gray */
         }
     </style>
 `;
