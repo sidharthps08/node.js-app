@@ -34,7 +34,7 @@ router.get('/',(req,res,next) => {
 
 router.get('/admin', (req, res, next) =>{
 
-    res.render('home',null);
+    res.render('home');
 });
 
 module.exports = router;
