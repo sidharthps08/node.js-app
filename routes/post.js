@@ -32,7 +32,7 @@ router.get('/',(req,res,next) => {
     res.send(`${styles}<p>THE WEBPAGE IS DEVELOPED BY <strong><b>SIDHARTH P S</b></strong></p>`);
 });
 
-router.get('/home', (req, res, next) =>{
+router.get('/admin', (req, res, next) =>{
 
     res.render('home',null);
 });
