@@ -1,27 +1,65 @@
-<html>
-
-	<head>
-
-		<title>NodeJs Page</title>
-
-	</head>
-
-	<body>
-
-		<h1> This is NodeJs HomePage</h1>
-			<table style="width:100%">
-				<tr>
-					<td>
-						<form>
-							<label for="name">Enter Your Email:</label><br>
-							<input type="text" id="email" name="email"><br><br>
-  							<input type="submit" value="Signup">
-						</form>
-					</td>
-
-				</tr>
-			</table>
-
-
-	</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Webpage</title>
+    <style>
+        body {
+            background-color: #f0f0f0; /* Background color */
+            color: #333; /* Font color */
+            font-family: Arial, sans-serif; /* Font family */
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #0066cc; /* Heading color */
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #0066cc;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056aa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to my Sample Webpage</h1>
+        <form>
+            <label for="email">Enter Your Email:</label><br>
+            <input type="text" id="email" name="email"><br><br>
+            <input type="submit" value="Signup">
+        </form>
+    </div>
+</body>
 </html>
