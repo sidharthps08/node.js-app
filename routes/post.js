@@ -39,5 +39,3 @@ router.get('/home', (req, res, next) =>{
 
 module.exports = router;
 
-ubuntu@ubuntu:~/node.js-app/routes$ 
-
