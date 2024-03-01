@@ -45,8 +45,8 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'ArogoCD', passwordVariable: 'Arogo_Pass', usernameVariable: 'Arogo_User')]) {
                     script {
                         sh "argocd login 10.152.183.61:443 --username ${Arogo_User} --password ${Arogo_Pass} --insecure"
-                        sh "argocd app set myapp -p containers.image=localhost:32000/nodeapp-image:$BUILD_NUMBER"
-                        sh "argocd --grpc-web app sync myapp --force"
+                        sh "argocd app set <app_name> -p containers.image=localhost:32000/nodeapp-image:$BUILD_NUMBER"
+                        sh "argocd --grpc-web app sync <app_name> --force"
                         }
                     }
                 }
